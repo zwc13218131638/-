@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/xxx-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-deptmodule" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-deptmodule/xxx-deptmodule-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-deptmodule/xxx-deptmodule-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-deptmodule/xxx-deptmodule-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-deptmodule/xxx-deptmodule-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-empmodule" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-empmodule/xxx-empmodule-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-empmodule/xxx-empmodule-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-empmodule/xxx-empmodule-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-empmodule/xxx-empmodule-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-ordermodule" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-ordermodule/xxx-ordermodule-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-parent" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

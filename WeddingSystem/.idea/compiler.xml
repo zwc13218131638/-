@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="xxx-empmodule-dao" />
+        <module name="xxx-deptmodule-web" />
+        <module name="xxx-deptmodule-interface" />
+        <module name="xxx-common" />
+        <module name="xxx-empmodule-web" />
+        <module name="xxx-deptmodule-service" />
+        <module name="xxx-deptmodule-dao" />
+        <module name="xxx-empmodule-interface" />
+        <module name="xxx-empmodule-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="xxx-common" target="8" />
+      <module name="xxx-deptmodule" target="8" />
+      <module name="xxx-deptmodule (1)" target="8" />
+      <module name="xxx-deptmodule-dao" target="8" />
+      <module name="xxx-deptmodule-interface" target="8" />
+      <module name="xxx-deptmodule-service" target="8" />
+      <module name="xxx-deptmodule-web" target="8" />
+      <module name="xxx-empmodule" target="8" />
+      <module name="xxx-empmodule-dao" target="8" />
+      <module name="xxx-empmodule-interface" target="8" />
+      <module name="xxx-empmodule-service" target="8" />
+      <module name="xxx-empmodule-web" target="8" />
+      <module name="xxx-interface" target="1.5" />
+      <module name="xxx-ordermodule" target="1.5" />
+      <module name="xxx-ordermodule-dao" target="1.5" />
+      <module name="xxx-parent" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
