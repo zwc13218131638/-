@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/axios.min.js"></script>
+</head>
+<body>
+登录页
+<form action="/user/login" method="post" name="f">
+    <p>
+        用户名：<input type="text" name="username">
+    </p>
+    <p>
+        密码：<input type="password" name="password">
+    </p>
+    <input name="submit" type="button" value="Login" onclick="login()"/>
+</form>
+</body>
+<script>
+    var serverPath = "http://localhost:8183/";
+
+    function login() {
+        //可以先做一些校验
+        //注意:axios默认以json格式提交数据，这里为了迎合SpringSecurity的特点
+        //将数据提交方式改为表单方式提交，即使用&连接请求参数的格式
+        axios.post(serverPath + "user/login", {
+            username: document.f.username.value,
+            password: document.f.password.value
+        }, {
+            headers: {
+                'Content-Type': "application/x-www-form-urlencoded"
+            },
+            transformRequest: function (data) {
+                var ret = ''
+                for (var it in data) {
+                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                }
+                return ret
+            }
+        }).then(function (res) {
+            //返回登录后的用户信息
+            console.log(res.data.data);
+        }).catch(function (reason) {
+            //登录失败返回的错误信息
+            console.log(reason.response.data);
+        });
+    }
+
+
+</script>
+</html>

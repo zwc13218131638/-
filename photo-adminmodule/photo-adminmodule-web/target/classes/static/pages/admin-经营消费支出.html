@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>财务管理</title>
+        <link rel="stylesheet" href="../lib/layui/css/layui.css">
+        <script type="text/javascript" src="../lib/layui/layui.all.js"></script>
+
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <div style="font-size: 16px; line-height: 50px;color: #333333;margin-left:15px;border-bottom-color:#F2F2F2 ">
+            首页> 收银管理> 费用支出
+        </div>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="text-align: center">经营性费用支出</legend>
+        </fieldset>
+
+
+        <form class="layui-form" >
+            <div class="layui-form-item">
+                <label class="layui-form-label">费用项目</label>
+                <div class="layui-input-block">
+                    <select id="orderid" name="outlayname" lay-filter="orderid" lay-verify="required">
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">费用金额</label>
+                <div class="layui-input-block">
+                    <input type="text" name="outlayprice"
+                           class="layui-input" lay-verify="required">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">日期选择</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="date" id="date" autocomplete="off" class="layui-input" lay-verify="required">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" name="description" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            </div>
+            <div style="text-align: center">
+                <button class="layui-btn" lay-submit lay-filter="submit">添加</button>
+            </div>
+        </form>
+    </body>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/common.js"></script>
+
+    <script>
+        layui.use(['form', 'laydate'], function() {
+            var form = layui.form
+                , laydate = layui.laydate;
+            form.render()
+            laydate.render({
+                elem: '#date'
+            });
+
+            form.on('submit(submit)', function (data) {
+                axios.post(address + '/outlay', {
+                    id: data.field.id,
+                    outlayname:data.field.outlayname,
+                    outlayprice:data.field.outlayprice,
+                    date: data.field.date,
+                    description: data.field.description
+                })
+                    .then(function (response) {
+                        if (response.data.code = 200)
+                            layer.msg("添加成功");
+                    })
+                    .catch(function (error) {
+                        layer.msg(error.response.data.error);
+                    });
+                return false;
+            });
+        })
+
+        //得到可操作的订单号
+        axios.get(address + '/outlaynames')
+            .then(function (response) {
+                console.log(response.data.data);
+                var html = "<option value=\"\">选择项目继续操作</option>";
+                for (var i = 0; i < response.data.data.length; i++) {
+                    html += ("<option value=\"" + response.data.data[i].outlayname + "\">" + response.data.data[i].outlayname + "</option>")
+                }
+                $("#orderid").html(html)
+                layui.form.render("select")
+            })
+            .catch(function (error) {
+            });
+
+        axios.get(address + '/outlay')
+            .then(function (response) {
+                //      console.log(response.data);
+                $("input[ name='shopname'] ").val(response.data.data.shopname)
+                $("input[ name='bridegroom'] ").val(response.data.data.bridegroom)
+                $("input[ name='realincome'] ").val(response.data.data.realincome)
+                $("input[ name='phone'] ").val(response.data.data.tel)
+            })
+            .catch(function (error) {
+            });
+
+
+    </script>
+
+</html>

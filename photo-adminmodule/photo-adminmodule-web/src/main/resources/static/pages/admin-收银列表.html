@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>收银管理</title>
+        <link rel="stylesheet" href="../lib/layui/css/layui.css">
+        <script type="text/javascript" src="../lib/layui/layui.all.js"></script>
+    </head>
+    <body>
+        <div style="font-size: 16px; line-height: 50px;color: #333333;margin-left:15px;border-bottom-color:#F2F2F2 ">
+            首页> 收银管理> 收银记录
+        </div>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="text-align: center">收银记录</legend>
+        </fieldset>
+        <script type="text/html" id="toolbarDemo">
+            <div class="demoTable">
+                订单号：
+                <div class="layui-inline">
+                    <input class="layui-input" name="orderid" id="orderid" autocomplete="off">
+                </div>
+                <button class="layui-btn layui-bg-blue" lay-event="getbyid">搜索</button>
+                &nbsp;&nbsp;
+                <div class="layui-inline">
+                    <button class="layui-btn layui-bg-blue" lay-event="gettype1">已收款</button>
+                    <button class="layui-btn layui-bg-blue" lay-event="gettype2">已补款</button>
+                    <button class="layui-btn layui-bg-blue" lay-event="gettype3">后续消费</button>
+                    <button class="layui-btn layui-bg-orange" lay-event="gettype4">已退单</button>
+                </div>
+            </div>
+        </script>
+        <table class="layui-table" lay-filter="test" id="test">
+        </table>
+    </body>
+    <script type="text/html" id="payTpl">
+        {{#  if(d.paytype === 1){ }}
+        <span style="color: #F581B1;">现金</span>
+        {{#  } else if(d.paytype === 2){ }}
+        <span style="color: #F581B1;">在线支付</span>
+        {{#  } else if(d.paytype === 3){ }}
+        <span style="color: #F581B1;">赠送</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="stateTpl">
+        {{#  if(d.state==1){ }}
+        <span style="color: #FFA500;">已收款</span>
+        {{#  } else { }}
+        <span style="color: #FF0033;">已完成</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="typeTpl">
+        {{#  if(d.type === 1){ }}
+        <span style="color: #FFA500;">收款</span>
+        {{#  } else if(d.type === 2){ }}
+        <span style="color: #FFA500;">补款</span>
+        {{#  } else if(d.type === 3){ }}
+        <span style="color: #FFA500;">后期消费</span>
+        {{#  } else if(d.type === 4){ }}
+        <span style="color: #FFA500;">退单</span>
+        {{#  } }}
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+        reander("", "")
+        function reander(orderid, type) {
+            layui.use('table', function () {
+                var table = layui.table;
+                table.render({
+                    elem: '#test',
+                    skin: 'line',
+                    url: address + '/moneymanagers?orderid=' + orderid + "&type=" + type,
+                    response: {
+                        statusName: 'code' //规定数据状态的字段名称，默认：code
+                        , statusCode: 200 //规定成功的状态码，默认：0
+                        , msgName: 'error' //规定状态信息的字段名称，默认：msg
+                        , countName: 'totalcount' //规定数据总数的字段名称，默认：count
+                        , dataName: 'data' //规定数据列表的字段名称，默认：data
+                    }
+                    , limits: [5, 10, 20]
+                    , toolbar: '#toolbarDemo'
+                    , page: true //开启分页
+                    , cols: [[ //表头
+                        , {field: 'id', title: ' 收银账单编号', align: 'center'}
+                        , {field: 'orderid', title: '订单号', align: 'center',sort:true}
+                        , {field: 'price', title: '套系', align: 'center'}
+                        , {field: 'discount', title: '优惠', align: 'center'}
+                        , {field: 'realprice', title: '优惠后价格', align: 'center'}
+                        , {field: 'frontmoney', title: '收款价格', align: 'center'}
+                        , {field: 'balancemoney', title: '余款', align: 'center'}
+                        , {field: 'latermoney', title: '后期消费', align: 'center'}
+                        , {field: 'refund', title: '后期退款', align: 'center'}
+                        , {field: 'frontTime', title: '收款时间', align: 'center'}
+                        , {field: 'laterTime', title: '后期消费时间', align: 'center'}
+                        , {field: 'refundTime', title: '退款时间', align: 'center'}
+                        , {field: 'state', title: '收款状态', align: 'center', templet: '#stateTpl'}
+                        , {field: 'type', title: '类型', align: 'center',templet: '#typeTpl'}
+                        , {field: 'paytype', title: '付款方式', align: 'center',templet: '#payTpl'}
+                        , {field: 'realincome', title: '实收金额', align: 'center'}
+                        , {field: 'givechange', title: '找零', align: 'center'}
+                        , {field: 'remarks', title: '备注', align: 'center'}
+                    ]]
+                })
+
+                    table.on('toolbar(test)',
+                        function (obj) {
+                            var orderid = $("#orderid").val();
+                            switch (obj.event) {
+                                case 'getbyid':
+                                    reander(orderid, "")
+                                    break;
+                                case 'gettype1':
+                                    reander(orderid, 1)
+                                    break;
+                                case 'gettype2':
+                                    reander(orderid, 2)
+                                    break;
+                                case 'gettype3':
+                                    reander(orderid, 3)
+                                    break;
+                                case 'gettype4':
+                                    reander(orderid, 4)
+                                    break;
+                            }
+                        }
+                    )
+                }
+            )
+        }
+    </script>
+</html>

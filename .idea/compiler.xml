@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="photo-webmodule-interface" />
+        <module name="photo-adminmodule-service" />
+        <module name="photo-adminmodule-web" />
+        <module name="photo-adminmodule-dao" />
+        <module name="photo-webmodule-dao" />
+        <module name="photo-webmodule-service" />
+        <module name="photo-adminmodule-interface" />
+        <module name="photo-common" />
+        <module name="photo-webmodule-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="photo-adminmodule" target="8" />
+      <module name="photo-adminmodule-dao" target="8" />
+      <module name="photo-adminmodule-interface" target="8" />
+      <module name="photo-adminmodule-service" target="8" />
+      <module name="photo-adminmodule-web" target="8" />
+      <module name="photo-common" target="8" />
+      <module name="photo-deptmodule-dao" target="8" />
+      <module name="photo-deptmodule-interface" target="8" />
+      <module name="photo-deptmodule-service" target="8" />
+      <module name="photo-deptmodule-web" target="8" />
+      <module name="photo-empmodule-dao" target="8" />
+      <module name="photo-empmodule-interface" target="8" />
+      <module name="photo-empmodule-service" target="8" />
+      <module name="photo-parent" target="8" />
+      <module name="photo-webmodule" target="8" />
+      <module name="photo-webmodule-dao" target="8" />
+      <module name="photo-webmodule-interface" target="8" />
+      <module name="photo-webmodule-service" target="8" />
+      <module name="photo-webmodule-web" target="8" />
+      <module name="xxx-deptmodule-dao" target="8" />
+      <module name="xxx-deptmodule-interface" target="8" />
+      <module name="xxx-deptmodule-service" target="8" />
+      <module name="xxx-deptmodule-web" target="8" />
+      <module name="xxx-empmodule-dao" target="8" />
+      <module name="xxx-empmodule-interface" target="8" />
+      <module name="xxx-empmodule-service" target="8" />
+      <module name="xxx-empmodule-web" target="8" />
+      <module name="xxx-interface" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

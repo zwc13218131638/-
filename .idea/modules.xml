@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/photo-adminmodule/photo-adminmodule.iml" filepath="$PROJECT_DIR$/photo-adminmodule/photo-adminmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-dao/photo-adminmodule-dao.iml" filepath="$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-dao/photo-adminmodule-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-interface/photo-adminmodule-interface.iml" filepath="$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-interface/photo-adminmodule-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-service/photo-adminmodule-service.iml" filepath="$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-service/photo-adminmodule-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-web/photo-adminmodule-web.iml" filepath="$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-web/photo-adminmodule-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-common/photo-common.iml" filepath="$PROJECT_DIR$/photo-common/photo-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-parent/photo-parent.iml" filepath="$PROJECT_DIR$/photo-parent/photo-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-webmodule/photo-webmodule.iml" filepath="$PROJECT_DIR$/photo-webmodule/photo-webmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-webmodule/photo-webmodule-dao/photo-webmodule-dao.iml" filepath="$PROJECT_DIR$/photo-webmodule/photo-webmodule-dao/photo-webmodule-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-webmodule/photo-webmodule-interface/photo-webmodule-interface.iml" filepath="$PROJECT_DIR$/photo-webmodule/photo-webmodule-interface/photo-webmodule-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-webmodule/photo-webmodule-service/photo-webmodule-service.iml" filepath="$PROJECT_DIR$/photo-webmodule/photo-webmodule-service/photo-webmodule-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photo-webmodule/photo-webmodule-web/photo-webmodule-web.iml" filepath="$PROJECT_DIR$/photo-webmodule/photo-webmodule-web/photo-webmodule-web.iml" />
+    </modules>
+  </component>
+</project>

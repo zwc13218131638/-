@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/photo-adminmodule" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-adminmodule/photo-adminmodule-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-webmodule" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-webmodule/photo-webmodule-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-webmodule/photo-webmodule-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-webmodule/photo-webmodule-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/photo-webmodule/photo-webmodule-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxx-interface" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

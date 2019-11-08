@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>财务管理</title>
+        <link rel="stylesheet" href="../lib/layui/css/layui.css">
+        <script type="text/javascript" src="../lib/layui/layui.all.js"></script>
+    </head>
+    <body>
+        <div style="font-size: 16px; line-height: 50px;color: #333333;margin-left:15px;border-bottom-color:#F2F2F2 ">
+            首页> 财务管理> 费用设置
+        </div>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="text-align: center">经营性费用设置</legend>
+        </fieldset>
+
+
+        <script type="text/html" id="toolbarDemo">
+            <div class="demoTable">
+                费用名称：
+                <div class="layui-inline">
+                    <input class="layui-input" name="outlayname" id="outlayname" autocomplete="off">
+                </div>
+                <button class="layui-btn layui-bg-blue" lay-event="addoutlay">新增</button>
+            </div>
+        </script>
+
+        <table class="layui-table" lay-filter="test" id="test">
+        </table>
+
+        <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">删除</a>
+        </script>
+
+    </body>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/common.js"></script>
+
+
+    <script>
+
+        render()
+
+        function render() {
+            layui.use('table', function () {
+                    var table = layui.table;
+                    table.render({
+                        elem: '#test',
+                        url: address + '/outlaynames',
+                        done: function (res, curr, count) {
+                            $("table").css("width", "100%");
+                        },
+                        response: {
+                            statusName: 'code' //规定数据状态的字段名称，默认：code
+                            , statusCode: 200 //规定成功的状态码，默认：0
+                            , msgName: 'error' //规定状态信息的字段名称，默认：msg
+                            , countName: 'totalcount' //规定数据总数的字段名称，默认：count
+                            , dataName: 'data' //规定数据列表的字段名称，默认：data
+                        }
+
+                        , limits: [5, 10, 20]
+                        , toolbar: '#toolbarDemo'
+                        , totalRow: true
+                        , cols: [[ //表头
+                            , {field: 'outlayname', title: '费用项目', totalRowText: '费用合计'}
+                            , {field: 'estimate', title: '预估费用(月)', edit: "text", totalRow: true, width: '20%'}
+                            , {field: 'description', title: '备注信息', edit: "text"}
+                            , {title: '工具栏', width: 150, toolbar: '#barDemo'}
+                        ]]
+                    })
+                    table.on('toolbar(test)',
+                        function (obj) {
+                            var orderid = $("#orderid").val();
+                            switch (obj.event) {
+                                case 'addoutlay':
+                                    var name = $("#outlayname").val();
+                                    add(name);
+                                    break;
+                            }
+                        }
+                    )
+                    table.on('edit(test)', function (obj) {
+                        modfiy(obj.data)
+                    });
+
+                    table.on('tool(test)', function (obj) {
+                        switch (obj.event) {
+                            case 'edit':
+                                layer.confirm('确认要删除吗？', function (index) {
+                                    del(obj.data.id)
+                                })
+                                break;
+                        }
+                    })
+                }
+            )
+
+            function modfiy(data) {
+                var myDate = new Date;
+                var year = myDate.getFullYear(); //获取当前年
+                var mon = myDate.getMonth() + 1; //获取当前月
+                var date = myDate.getDate(); //获取当前日
+                if ( date < 10) {
+                    date = "0" + date;
+                }
+                var now = year + "-" + mon + "-" + date;
+                axios.put(address + '/outlay', {
+                    id: data.id,
+                    outlayname: data.outlayname,
+                    description: data.description,
+                    estimate: data.estimate,
+                    date: now,
+                })
+                    .then(function (response) {
+                        if (response.data.data.code == 200) {
+                            layer.msg("修改成功")
+                        }
+                        render();
+                    })
+                    .catch(function (error) {
+                        layer.msg("失败")
+                    });
+            }
+
+            function add(name) {
+                axios.post(address + '/outlay', {
+                    outlayname: name
+                })
+                    .then(function (response) {
+                        if (response.data.code == 200) {
+                            layer.msg("新增成功")
+                        }
+                        render();
+                    })
+                    .catch(function (error) {
+                        layer.msg(error.response.data.error)
+                    });
+            }
+
+            function del(id) {
+                axios.delete(address + '/outlay/' + id)
+                    .then(function (response) {
+                        if (response.data.code == 200) {
+                            layer.msg("删除成功")
+                        }
+                        render();
+                    })
+                    .catch(function (error) {
+                        layer.msg(error.response.data.error)
+                    });
+            }
+        }
+    </script>
+</html>

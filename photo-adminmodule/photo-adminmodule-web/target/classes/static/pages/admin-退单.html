@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>收银管理</title>
+        <link rel="stylesheet" href="../lib/layui/css/layui.css">
+        <script type="text/javascript" src="../lib/layui/layui.all.js"></script>
+    </head>
+    <body>
+        <div style="font-size: 16px; line-height: 50px;color: #333333;margin-left:15px;border-bottom-color:#F2F2F2 ">
+            首页> 收银管理> 退单
+        </div>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend style="text-align: center">退单</legend>
+        </fieldset>
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">流水号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="id" lay-verify="title" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">原单号</label>
+                <div class="layui-input-block">
+                    <select id="orderid" name="orderid" lay-filter="orderid" lay-verify="required">
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">店名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="shopname"
+                               autocomplete="off" class="layui-input" readonly>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">客户姓名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="bridegroom"
+                               autocomplete="off" class="layui-input" readonly>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">总额</label>
+                <div class="layui-input-block">
+                    <input type="text" name="realprice"
+                           placeholder="请输入" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">已付</label>
+                <div class="layui-input-block">
+                    <input type="text" name="frontmoney"
+                           placeholder="请输入" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">退款</label>
+                <div class="layui-input-block">
+                    <input type="text" name="refund"
+                           placeholder="请输入" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">咨询电话</label>
+                <div class="layui-input-block">
+                    <input type="text" name="phone" value="400-666888"
+                           placeholder="请输入" autocomplete="off" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="textarea" name="remarks"
+                           placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">退款方式</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="paytype" value="1" title="现金" checked="">
+                    <input type="radio" name="paytype" value="2" title="在线支付">
+                    <input type="radio" name="paytype" value="0" title="赠送">
+                </div>
+            </div>
+            <div style="text-align: center">
+                <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+            </div>
+        </form>
+    </body>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/common.js"></script>
+
+
+    <script>
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+
+
+
+            form.on('select(orderid)',function (data) {
+
+                var orderid = $("#orderid option:selected").val()
+                console.log(orderid)
+
+                axios.get(address + '/moneymanager/' + orderid + "/1")
+                    .then(function (response) {
+                        $("input[ name='realprice'] ").val(response.data.data.realprice)
+                        $("input[ name='frontmoney'] ").val(response.data.data.frontmoney)
+                    })
+                    .catch(function (error) {
+                        layer.msg(error.response.data.error)
+                        $("input[name='orderid']").val("")
+                    });
+
+                $("input[name='realincome']").val("")
+                $("input[name='latermoney']").val("")
+                axios.get(address + '/orderform/' + orderid)
+                    .then(function (response) {
+                        //      console.log(response.data);
+                        $("input[ name='shopname'] ").val(response.data.data.shopname)
+                        $("input[ name='bridegroom'] ").val(response.data.data.bridegroom)
+                    })
+                    .catch(function (error) {
+                    });
+
+            })
+
+            //得到可操作的订单号
+            axios.get(address + '/moneymanager/type/4')
+                .then(function (response) {
+                    console.log(response.data.data);
+                    var html="<option value=\"\">选择订单号继续操作</option>";
+                    for(var i=0;i<response.data.data.length;i++){
+                        html +=("<option value=\""+response.data.data[i]+"\">"+response.data.data[i]+"</option>")
+                    }
+                    $("#orderid").html(html)
+                    layui.form.render("select")
+                })
+                .catch(function (error) {
+                });
+
+
+            //生成新流水号
+            axios.get(address + '/moneymanagerid', {})
+                .then(function (response) {
+                    //      console.log(response.data.data);
+                    $("input[ name='id'] ").val(response.data.data)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+            //提交
+            form.on('submit(submit)', function (data) {
+                var price = $("#price").val()
+                console.log(data.field)
+
+                var myDate = new Date;
+                var year = myDate.getFullYear(); //获取当前年
+                var mon = myDate.getMonth() + 1; //获取当前月
+                var date = myDate.getDate(); //获取当前日
+                if ( date < 10) {
+                    date = "0" + date;
+                }
+                var now = year+"-"+mon+"-"+date;
+
+                axios.put(address + '/moneymanager', {
+                    id: data.field.id,
+                    orderid: data.field.orderid,
+                    realprice: data.field.realprice,
+                    frontmoney: data.field.frontmoney,
+                    refund: $("input[ name='refund']").val(),
+                    type: 4,
+                    remarks: data.field.remarks,
+                    paytype:$("input[name='paytype']").val(),
+                    refundTime:now,
+                    state:2
+                })
+                    .then(function (response) {
+                        if (response.data.code = 200)
+                            layer.msg("退单成功");
+                    })
+                    .catch(function (error) {
+                        console.log(error.response);
+                    });
+                return false;
+            });
+        });
+    </script>
+
+</html>
