@@ -16,7 +16,7 @@
     </parent>
     <properties>
         <javassist.version>3.18.1-GA</javassist.version>
-        <nety.version>3.6.10.Final</nety.version>
+        <nety.version>3.9.8.Final</nety.version>
         <dubbo.version>2.5.3</dubbo.version>
         <zk.version>3.4.7</zk.version>
         <zk.client.version>0.1</zk.client.version>
